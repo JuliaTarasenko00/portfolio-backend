@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 import { handleSaveError, runValidation } from './hooks.js';
 
 const contactSchema = new Schema({
-  ua: {
+  uk: {
     name: {
       type: String,
       required: true,
@@ -74,7 +74,7 @@ const contactSchema = new Schema({
 });
 
 export const contactJoiSchema = Joi.object({
-  ua: Joi.object({
+  uk: Joi.object({
     name: Joi.string().required(),
     avatar: Joi.string().required(),
     position: Joi.string().required(),

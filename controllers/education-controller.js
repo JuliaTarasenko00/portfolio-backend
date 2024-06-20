@@ -1,11 +1,11 @@
 import ctrlWrapper from '../decorators/ctrlWrapper.js';
 import { finallyResult } from '../helpers/finallyResult.js';
-import Contact from '../models/Contact.js';
+import Education from '../models/Education.js';
 
-const getContactInformation = async (req, res) => {
+const getEducation = async (req, res) => {
   const { language = 'en' } = req.query;
 
-  const result = await Contact.find();
+  const result = await Education.find();
 
   const data = finallyResult(result, language);
 
@@ -13,5 +13,5 @@ const getContactInformation = async (req, res) => {
 };
 
 export default {
-  getContactInformation: ctrlWrapper(getContactInformation),
+  getEducation: ctrlWrapper(getEducation),
 };
