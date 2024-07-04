@@ -2,76 +2,87 @@ import Joi from 'joi';
 import { Schema, model } from 'mongoose';
 import { handleSaveError, runValidation } from './hooks.js';
 
-const contactSchema = new Schema({
-  uk: {
-    name: {
-      type: String,
-      required: true,
+const contactSchema = new Schema(
+  {
+    uk: {
+      name: {
+        type: String,
+        required: true,
+      },
+      avatar: {
+        type: String,
+        required: true,
+      },
+      position: {
+        type: String,
+        required: true,
+      },
+      phoneNumber: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      location: {
+        type: String,
+        required: true,
+      },
+      git: {
+        type: String,
+        required: true,
+      },
+      linkedin: {
+        type: String,
+        required: true,
+      },
+      cv: {
+        type: String,
+        // required: true,
+      },
     },
-    avatar: {
-      type: String,
-      required: true,
-    },
-    position: {
-      type: String,
-      required: true,
-    },
-    phoneNumber: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    location: {
-      type: String,
-      required: true,
-    },
-    git: {
-      type: String,
-      required: true,
-    },
-    linkedin: {
-      type: String,
-      required: true,
+    en: {
+      name: {
+        type: String,
+        required: true,
+      },
+      avatar: {
+        type: String,
+        required: true,
+      },
+      position: {
+        type: String,
+        required: true,
+      },
+      phoneNumber: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      location: {
+        type: String,
+        required: true,
+      },
+      git: {
+        type: String,
+        required: true,
+      },
+      linkedin: {
+        type: String,
+        required: true,
+      },
+      cv: {
+        type: String,
+        // required: true,
+      },
     },
   },
-  en: {
-    name: {
-      type: String,
-      required: true,
-    },
-    avatar: {
-      type: String,
-      required: true,
-    },
-    position: {
-      type: String,
-      required: true,
-    },
-    phoneNumber: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    location: {
-      type: String,
-      required: true,
-    },
-    git: {
-      type: String,
-      required: true,
-    },
-    linkedin: {
-      type: String,
-      required: true,
-    },
-  },
-});
+  { versionKey: false }
+);
 
 export const contactJoiSchema = Joi.object({
   uk: Joi.object({

@@ -2,64 +2,67 @@ import Joi from 'joi';
 import { Schema, model } from 'mongoose';
 import { handleSaveError, runValidation } from './hooks.js';
 
-const educationSchema = new Schema({
-  uk: [
-    {
-      start_education: {
-        type: String,
-        required: true,
+const educationSchema = new Schema(
+  {
+    uk: [
+      {
+        start_education: {
+          type: String,
+          required: true,
+        },
+        end_education: {
+          type: String,
+          required: true,
+        },
+        degree: {
+          type: String,
+          required: true,
+        },
+        programme_subject: {
+          type: String,
+          required: true,
+        },
+        name_organization: {
+          type: String,
+          required: true,
+        },
+        id: {
+          type: String,
+          required: true,
+        },
       },
-      end_education: {
-        type: String,
-        required: true,
+    ],
+    en: [
+      {
+        start_education: {
+          type: String,
+          required: true,
+        },
+        end_education: {
+          type: String,
+          required: true,
+        },
+        degree: {
+          type: String,
+          required: true,
+        },
+        programme_subject: {
+          type: String,
+          required: true,
+        },
+        name_organization: {
+          type: String,
+          required: true,
+        },
+        id: {
+          type: String,
+          required: true,
+        },
       },
-      degree: {
-        type: String,
-        required: true,
-      },
-      programme_subject: {
-        type: String,
-        required: true,
-      },
-      name_organization: {
-        type: String,
-        required: true,
-      },
-      id: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  en: [
-    {
-      start_education: {
-        type: String,
-        required: true,
-      },
-      end_education: {
-        type: String,
-        required: true,
-      },
-      degree: {
-        type: String,
-        required: true,
-      },
-      programme_subject: {
-        type: String,
-        required: true,
-      },
-      name_organization: {
-        type: String,
-        required: true,
-      },
-      id: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-});
+    ],
+  },
+  { versionKey: false }
+);
 
 export const educationJoiSchema = Joi.object({
   uk: Joi.array().items(
