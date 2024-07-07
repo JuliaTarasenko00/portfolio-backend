@@ -35,7 +35,7 @@ const addContactInformation = async (req, res) => {
     },
     en: {
       avatar: pathEn,
-      ...body.uk,
+      ...body.en,
     },
   };
 
@@ -44,8 +44,61 @@ const addContactInformation = async (req, res) => {
   res.status(201).json(result);
 };
 
+const editContactInformation = async (req, res) => {
+  const { body } = req;
+  const { id } = req.params;
+
+  let pathUk = '';
+  let pathEn = '';
+
+  const fileUk = req.files['uk[avatar]'];
+  const fileEn = req.files['en[avatar]'];
+
+  if (fileUk) {
+    pathUk = fileUk[0].path;
+  }
+  if (fileEn) {
+    pathEn = fileEn[0].path;
+  }
+
+  const data = {
+    uk: {
+      avatar: pathUk,
+      ...body.uk,
+    },
+    en: {
+      avatar: pathEn,
+      ...body.en,
+    },
+  };
+
+  const result = await Contact.findByIdAndUpdate(id, data, { new: true });
+
+  if (!result) {
+    throw HttpError(404);
+  }
+
+  res.json(result);
+};
+
+const deleteContactInformation = async (req, res) => {
+  const { id } = req.params;
+
+  const result = await Dish.findByIdAndDelete(id);
+
+  if (!result) {
+    throw HttpError(404);
+  }
+
+  res.json({
+    message: 'Data deleted successfully',
+  });
+};
+
 export default {
   getContactInformation: ctrlWrapper(getContactInformation),
   addContactInformation: ctrlWrapper(addContactInformation),
   getAllInformation: ctrlWrapper(getAllInformation),
+  editContactInformation: ctrlWrapper(editContactInformation),
+  deleteContactInformation: ctrlWrapper(deleteContactInformation),
 };
