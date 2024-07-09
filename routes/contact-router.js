@@ -17,7 +17,6 @@ contactRouter.post(
 );
 contactRouter.patch(
   '/edit/:id',
-
   upload.fields([
     { name: 'uk[avatar]', maxCount: 1 },
     { name: 'en[avatar]', maxCount: 1 },
