@@ -1,5 +1,6 @@
 import ctrlWrapper from '../decorators/ctrlWrapper.js';
 import { finallyResult } from '../helpers/finallyResult.js';
+import HttpError from '../helpers/HttpError.js';
 import Education from '../models/Education.js';
 
 const getEducation = async (req, res) => {

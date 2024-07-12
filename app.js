@@ -3,6 +3,7 @@ import cors from 'cors';
 import logger from 'morgan';
 import contactRouter from './routes/contact-router.js';
 import educationRouter from './routes/education-router.js';
+import authRouter from './routes/auth/auth-router.js';
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 
 app.use('/contact_information', contactRouter);
 app.use('/education', educationRouter);
+
+app.use('/auth', authRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });

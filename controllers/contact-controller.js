@@ -1,5 +1,6 @@
 import ctrlWrapper from '../decorators/ctrlWrapper.js';
 import { finallyResult } from '../helpers/finallyResult.js';
+import HttpError from '../helpers/HttpError.js';
 import Contact from '../models/Contact.js';
 
 const getContactInformation = async (req, res) => {
