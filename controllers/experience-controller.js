@@ -1,12 +1,12 @@
 import ctrlWrapper from '../decorators/ctrlWrapper.js';
 import { finallyResult } from '../helpers/finallyResult.js';
 import HttpError from '../helpers/HttpError.js';
-import Education from '../models/Education.js';
+import { Experience } from '../models/Experience.js';
 
-const getEducation = async (req, res) => {
+const getExperience = async (req, res) => {
   const { language = 'en' } = req.query;
 
-  const result = await Education.find();
+  const result = await Experience.find();
 
   const data = finallyResult(result, language);
 
@@ -14,15 +14,15 @@ const getEducation = async (req, res) => {
 };
 
 const getAllEducationInformation = async (req, res) => {
-  const result = await Education.find();
+  const result = await Experience.find();
 
   res.json(result);
 };
 
-const getEducationById = async (req, res) => {
+const getExperienceById = async (req, res) => {
   const { id } = req.params;
 
-  const result = await Education.findById(id);
+  const result = await Experience.findById(id);
 
   if (!result) {
     throw HttpError(404);
@@ -31,10 +31,10 @@ const getEducationById = async (req, res) => {
   res.json(result);
 };
 
-const addEducationInformation = async (req, res) => {
+const addExperienceInformation = async (req, res) => {
   const { body } = req;
 
-  const result = await Education.create(body);
+  const result = await Experience.create(body);
 
   if (!result) {
     throw HttpError(404);
@@ -43,11 +43,11 @@ const addEducationInformation = async (req, res) => {
   res.status(201).json(result);
 };
 
-const editEducationInformation = async (req, res) => {
+const experienceEditInformation = async (req, res) => {
   const { body } = req;
   const { id } = req.params;
 
-  const result = await Education.findByIdAndUpdate(id, body, { new: true });
+  const result = await Experience.findByIdAndUpdate(id, body, { new: true });
 
   if (!result) {
     throw HttpError(404);
@@ -59,7 +59,7 @@ const editEducationInformation = async (req, res) => {
 const deleteEducationInformation = async (req, res) => {
   const { id } = req.params;
 
-  await Education.findByIdAndDelete(id);
+  await Experience.findByIdAndDelete(id);
 
   res.json({
     message: 'Data deleted successfully',
@@ -67,10 +67,10 @@ const deleteEducationInformation = async (req, res) => {
 };
 
 export default {
-  getEducation: ctrlWrapper(getEducation),
+  getExperience: ctrlWrapper(getExperience),
   getAllEducationInformation: ctrlWrapper(getAllEducationInformation),
-  getEducationById: ctrlWrapper(getEducationById),
-  addEducationInformation: ctrlWrapper(addEducationInformation),
-  editEducationInformation: ctrlWrapper(editEducationInformation),
+  getExperienceById: ctrlWrapper(getExperienceById),
+  addExperienceInformation: ctrlWrapper(addExperienceInformation),
+  experienceEditInformation: ctrlWrapper(experienceEditInformation),
   deleteEducationInformation: ctrlWrapper(deleteEducationInformation),
 };

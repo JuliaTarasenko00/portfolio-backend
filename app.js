@@ -4,6 +4,7 @@ import logger from 'morgan';
 import contactRouter from './routes/contact-router.js';
 import educationRouter from './routes/education-router.js';
 import authRouter from './routes/auth/auth-router.js';
+import experienceRouter from './routes/experience-router.js';
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.use(express.json());
 
 app.use('/contact_information', contactRouter);
 app.use('/education', educationRouter);
-
+app.use('/experience', experienceRouter);
 app.use('/auth', authRouter);
 
 app.use((req, res) => {

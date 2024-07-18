@@ -53,26 +53,20 @@ const educationSchema = new Schema(
 );
 
 export const educationJoiSchema = Joi.object({
-  uk: Joi.array().items(
-    Joi.object({
-      start_education: Joi.string().required(),
-      end_education: Joi.string().required(),
-      degree: Joi.string().required(),
-      programme_subject: Joi.string().required(),
-      name_organization: Joi.string().required(),
-      id: Joi.string().required(),
-    })
-  ),
-  en: Joi.array().items(
-    Joi.object({
-      start_education: Joi.string().required(),
-      end_education: Joi.string().required(),
-      degree: Joi.string().required(),
-      programme_subject: Joi.string().required(),
-      name_organization: Joi.string().required(),
-      id: Joi.string().required(),
-    })
-  ),
+  uk: Joi.object({
+    start_education: Joi.string().required(),
+    end_education: Joi.string().required(),
+    degree: Joi.string().required(),
+    programme_subject: Joi.string().required(),
+    name_organization: Joi.string().required(),
+  }),
+  en: Joi.object({
+    start_education: Joi.string().required(),
+    end_education: Joi.string().required(),
+    degree: Joi.string().required(),
+    programme_subject: Joi.string().required(),
+    name_organization: Joi.string().required(),
+  }),
 });
 
 educationSchema.post('save', handleSaveError);
