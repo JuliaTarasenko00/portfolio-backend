@@ -1,6 +1,11 @@
 import { model, Schema } from 'mongoose';
 import { handleSaveError, runValidation } from './hooks.js';
 
+const valueType = {
+  values: ['style', 'front'],
+  message: 'subscription invalid',
+};
+
 const skillSchema = new Schema(
   {
     name_skill: {
@@ -10,6 +15,11 @@ const skillSchema = new Schema(
     image: {
       type: String,
       required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+      enum: valueType,
     },
   },
   { versionKey: false }

@@ -3,7 +3,11 @@ import HttpError from '../helpers/HttpError.js';
 import { Skill } from '../models/Skill.js';
 
 const getSkills = async (req, res) => {
-  const result = await Skill.find();
+  const { type } = req.query;
+
+  const result = await Skill.find({
+    ...(type !== undefined && { type: type }),
+  });
 
   res.json(result);
 };
