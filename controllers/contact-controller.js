@@ -20,14 +20,14 @@ const getAllInformation = async (req, res) => {
 };
 
 const addContactInformation = async (req, res) => {
-  const { body } = req;
+  const { body, files } = req;
 
   let pathUk = '';
   let pathEn = '';
 
-  if (req.files) {
-    pathUk = req.files['uk[avatar]'][0].path;
-    pathEn = req.files['en[avatar]'][0].path;
+  if (files) {
+    pathUk = files['uk[avatar]'][0].path;
+    pathEn = files['en[avatar]'][0].path;
   }
   const data = {
     uk: {
@@ -46,14 +46,14 @@ const addContactInformation = async (req, res) => {
 };
 
 const editContactInformation = async (req, res) => {
-  const { body } = req;
+  const { body, files } = req;
   const { id } = req.params;
 
   let pathUk = '';
   let pathEn = '';
 
-  const fileUk = req.files['uk[avatar]'];
-  const fileEn = req.files['en[avatar]'];
+  const fileUk = files['uk[avatar]'];
+  const fileEn = files['en[avatar]'];
 
   if (fileUk) {
     pathUk = fileUk[0].path;

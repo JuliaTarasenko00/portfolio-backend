@@ -9,6 +9,10 @@ const contactSchema = new Schema(
         type: String,
         required: true,
       },
+      telegram: {
+        type: String,
+        required: true,
+      },
       avatar: {
         type: String,
         required: true,
@@ -44,6 +48,10 @@ const contactSchema = new Schema(
     },
     en: {
       name: {
+        type: String,
+        required: true,
+      },
+      telegram: {
         type: String,
         required: true,
       },

@@ -6,6 +6,7 @@ import {
   contactRouter,
   educationRouter,
   experienceRouter,
+  projectRouter,
   skillRouter,
 } from './routes/index.js';
 
@@ -22,6 +23,7 @@ app.use('/education', educationRouter);
 app.use('/experience', experienceRouter);
 app.use('/skills', skillRouter);
 app.use('/auth', authRouter);
+app.use('/project', projectRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });

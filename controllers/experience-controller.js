@@ -7,6 +7,7 @@ const getExperience = async (req, res) => {
   const { language = 'en' } = req.query;
 
   const result = await Experience.find();
+  console.log('result: ', result);
 
   const data = finallyResult(result, language);
 
