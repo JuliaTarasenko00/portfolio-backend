@@ -1,30 +1,15 @@
 import ctrlWrapper from '../decorators/ctrlWrapper.js';
+import { formatObjectByLanguage } from '../helpers/formatObjectByLanguage.js';
 import HttpError from '../helpers/HttpError.js';
 import Project from '../models/Project.js';
-
-const formatObjectByLanguage = (item, language, fields) => {
-  const formattedObject = {};
-
-  fields.forEach(field => {
-    if (field.includes(language)) {
-      formattedObject[field] = item[field];
-    } else if (!field.includes('_')) {
-      formattedObject[field] = item[field];
-    }
-  });
-
-  return { ...formattedObject, _id: item._id };
-};
 
 const getProjectInformation = async (req, res) => {
   const { language = 'en' } = req.query;
 
   const result = await Project.find();
 
-  const fields = Object.keys(result[0]._doc);
-
   const formattedResult = result.map(item =>
-    formatObjectByLanguage(item, language, fields)
+    formatObjectByLanguage(item, language, result)
   );
 
   res.json(formattedResult);

@@ -1,5 +1,5 @@
 import ctrlWrapper from '../decorators/ctrlWrapper.js';
-import { finallyResult } from '../helpers/finallyResult.js';
+import { formatObjectByLanguage } from '../helpers/formatObjectByLanguage.js';
 import HttpError from '../helpers/HttpError.js';
 import Contact from '../models/Contact.js';
 
@@ -8,9 +8,11 @@ const getContactInformation = async (req, res) => {
 
   const result = await Contact.find();
 
-  const data = finallyResult(result, language);
+  const formattedResult = result.map(item =>
+    formatObjectByLanguage(item, language, result)
+  );
 
-  res.json(...data);
+  res.json(...formattedResult);
 };
 
 const getAllInformation = async (req, res) => {
@@ -20,24 +22,16 @@ const getAllInformation = async (req, res) => {
 };
 
 const addContactInformation = async (req, res) => {
-  const { body, files } = req;
+  const { body, file } = req;
 
-  let pathUk = '';
-  let pathEn = '';
+  let path = '';
 
-  if (files) {
-    pathUk = files['uk[avatar]'][0].path;
-    pathEn = files['en[avatar]'][0].path;
+  if (file) {
+    path = file.path;
   }
   const data = {
-    uk: {
-      avatar: pathUk,
-      ...body.uk,
-    },
-    en: {
-      avatar: pathEn,
-      ...body.en,
-    },
+    avatar: path,
+    ...body,
   };
 
   const result = await Contact.create(data);
@@ -46,31 +40,20 @@ const addContactInformation = async (req, res) => {
 };
 
 const editContactInformation = async (req, res) => {
-  const { body, files } = req;
+  const { body, file } = req;
   const { id } = req.params;
 
-  let pathUk = '';
-  let pathEn = '';
+  let path = '';
 
-  const fileUk = files['uk[avatar]'];
-  const fileEn = files['en[avatar]'];
+  if (file) {
+    path = file.path;
+  }
 
-  if (fileUk) {
-    pathUk = fileUk[0].path;
-  }
-  if (fileEn) {
-    pathEn = fileEn[0].path;
-  }
+  const avatar = path !== '' && { avatar: path };
 
   const data = {
-    uk: {
-      avatar: pathUk,
-      ...body.uk,
-    },
-    en: {
-      avatar: pathEn,
-      ...body.en,
-    },
+    ...avatar,
+    ...body,
   };
 
   const result = await Contact.findByIdAndUpdate(id, data, { new: true });

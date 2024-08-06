@@ -15,19 +15,13 @@ contactRouter.get(
 contactRouter.post(
   '/add_information',
   authenticate,
-  upload.fields([
-    { name: 'uk[avatar]', maxCount: 1 },
-    { name: 'en[avatar]', maxCount: 1 },
-  ]),
+  upload.single('avatar'),
   contactController.addContactInformation
 );
 contactRouter.patch(
   '/edit/:id',
   authenticate,
-  upload.fields([
-    { name: 'uk[avatar]', maxCount: 1 },
-    { name: 'en[avatar]', maxCount: 1 },
-  ]),
+  upload.single('avatar'),
   isValidId,
   contactController.editContactInformation
 );
